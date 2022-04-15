@@ -1,6 +1,6 @@
 import 'package:aviation_web/services/flight.service.dart';
-import 'package:aviation_web/widgets/charts/airline_chart_card.dart';
 import 'package:aviation_web/widgets/flight_card.dart';
+import 'package:aviation_web/widgets/flight_chart_cards.dart';
 import 'package:firebase/firebase.dart';
 import 'package:firebase/firestore.dart' as fs;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,7 +50,7 @@ class TopPage extends StatelessWidget {
                     hasScrollBody: true,
                     child: Column(
                       children: [
-                        AirlineChartCard(documents: snapshot.data!.docs),
+                        FlightChartCards(documents: snapshot.data!.docs),
                         Expanded(
                           child: GridView.count(
                             crossAxisCount: 3,

@@ -1,5 +1,7 @@
+import 'dart:math' as math;
+
+import 'package:aviation_web/data/flight.constants.dart';
 import 'package:aviation_web/pages/chart_container.dart';
-import 'package:aviation_web/services/flight.service.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -10,54 +12,37 @@ class AirlineChartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        margin: const EdgeInsets.all(4),
-        color: Colors.blue[100],
-        shadowColor: Colors.blueGrey,
-        elevation: 3,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ChartContainer(
-                title: 'Airline',
-                color: const Color(0x00000000),
-                chart: PieChart(
-                  PieChartData(
-                    sections: [
-                      PieChartSectionData(
-                        value: generateData(documents, 0),
-                        title: 'JAL',
-                        color: const Color.fromARGB(255, 237, 63, 86),
-                      ),
-                      PieChartSectionData(
-                        value: generateData(documents, 1),
-                        title: 'ANA',
-                        color: const Color.fromARGB(255, 63, 78, 237),
-                      ),
-                      PieChartSectionData(
-                        value: generateData(documents, 2),
-                        title: 'SKY',
-                        color: const Color.fromARGB(255, 237, 234, 63),
-                      ),
-                      PieChartSectionData(
-                        value: generateData(documents, 3),
-                        title: 'SFJ',
-                        color: const Color.fromARGB(255, 5, 5, 1),
-                      ),
-                      PieChartSectionData(
-                        value: generateData(documents, 4),
-                        title: 'SNA',
-                        color: const Color.fromARGB(255, 63, 237, 153),
-                      ),
-                      PieChartSectionData(
-                        value: generateData(documents, 5),
-                        title: 'ADO',
-                        color: const Color.fromARGB(255, 63, 214, 237),
-                      ),
-                    ],
-                  ),
-                )),
-          ],
+    return ChartContainer(
+        title: 'Airline',
+        color: const Color(0x00000000),
+        chart: PieChart(
+          PieChartData(
+            sections: [
+              ...kAirlineList
+                  .map(
+                    (dynamic item) => PieChartSectionData(
+                      value: generateData(documents, item['value']),
+                      title: item['text'],
+                      color:
+                          Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+                              .withOpacity(1.0),
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
         ));
+  }
+
+  double generateData(List<dynamic> documents, int type) {
+    var count = 0.0;
+
+    documents.forEach((dynamic document) {
+      if (document.get('airline') == type) {
+        count += 1.0;
+      }
+    });
+
+    return count;
   }
 }
