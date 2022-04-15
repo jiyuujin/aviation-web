@@ -4,7 +4,7 @@ String getAirportName(dynamic id) {
   if (id == null) return '';
 
   var text = '';
-  for (var airport in kAirportList) {
+  for (Map<String, dynamic> airport in kAirportList) {
     if (airport['value'] == id) {
       text = airport['text'];
     }
@@ -16,7 +16,7 @@ String getAirlineName(dynamic id) {
   if (id == null) return '';
 
   var text = '';
-  for (var airline in kAirlineList) {
+  for (Map<String, dynamic> airline in kAirlineList) {
     if (airline['value'] == id) {
       text = airline['text'];
     }
@@ -28,7 +28,7 @@ String getBoardingTypeName(dynamic id) {
   if (id == null) return '';
 
   var text = '';
-  for (var boardingType in kBoardingTypeList) {
+  for (Map<String, dynamic> boardingType in kBoardingTypeList) {
     if (boardingType['value'] == id) {
       text = boardingType['text'];
     }

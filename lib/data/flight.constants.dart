@@ -1,4 +1,6 @@
-final dynamic kAirportList = [
+final List<int> year = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+
+final List<Map<String, dynamic>> kAirportList = [
   {'value': 0, 'text': '東京羽田 / HND'},
   {'value': 1, 'text': '東京成田 / NRT'},
   {'value': 2, 'text': '大阪伊丹 / ITM'},
@@ -17,7 +19,7 @@ final dynamic kAirportList = [
   {'value': 15, 'text': '台北 / TPE'},
 ];
 
-final dynamic kAirlineList = [
+final List<Map<String, dynamic>> kAirlineList = [
   {'value': 0, 'text': 'JAL', 'image': 'jal'},
   {'value': 1, 'text': 'ANA', 'image': 'ana'},
   {'value': 2, 'text': 'Skymark', 'image': 'skymark'},
@@ -37,7 +39,7 @@ final dynamic kAirlineList = [
   {'value': 16, 'text': 'Tiger Air', 'image': 'tiger'},
 ];
 
-final dynamic kBoardingTypeList = [
+final List<Map<String, dynamic>> kBoardingTypeList = [
   {'value': 0, 'text': 'Boeing787-9'},
   {'value': 1, 'text': 'Boeing787-8'},
   {'value': 2, 'text': 'Boeing777-3'},
