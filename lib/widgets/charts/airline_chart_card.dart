@@ -2,13 +2,14 @@ import 'dart:math' as math;
 
 import 'package:aviation_web/data/flight.constants.dart';
 import 'package:aviation_web/pages/chart_container.dart';
+import 'package:firebase/firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class AirlineChartCard extends StatelessWidget {
   const AirlineChartCard({Key? key, required this.documents}) : super(key: key);
 
-  final dynamic documents;
+  final List<DocumentSnapshot> documents;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class AirlineChartCard extends StatelessWidget {
             sections: [
               ...kAirlineList
                   .map(
-                    (dynamic item) => PieChartSectionData(
+                    (Map<String, dynamic> item) => PieChartSectionData(
                       value: generateData(documents, item['value']),
                       title: item['text'],
                       color:
