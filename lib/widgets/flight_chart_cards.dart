@@ -1,10 +1,11 @@
 import 'package:aviation_web/widgets/charts/airline_chart_card.dart';
+import 'package:firebase/firestore.dart';
 import 'package:flutter/material.dart';
 
 class FlightChartCards extends StatelessWidget {
   const FlightChartCards({Key? key, required this.documents}) : super(key: key);
 
-  final dynamic documents;
+  final List<DocumentSnapshot> documents;
 
   @override
   Widget build(BuildContext context) {
