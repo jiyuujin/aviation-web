@@ -13,32 +13,46 @@ class AirlineChartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChartContainer(
-        title: 'Airline',
-        color: const Color(0x00000000),
-        chart: PieChart(
-          PieChartData(
-            sections: [
-              ...kAirlineList
-                  .map(
-                    (Map<String, dynamic> item) => PieChartSectionData(
-                      value: generateData(documents, item['value']),
-                      title: item['text'],
-                      color:
-                          Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-                              .withOpacity(1.0),
+    return Card(
+        margin: const EdgeInsets.all(4),
+        color: Colors.blue[100],
+        shadowColor: Colors.blueGrey,
+        elevation: 3,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: ChartContainer(
+                  title: 'Airline',
+                  color: const Color(0x00000000),
+                  chart: PieChart(
+                    PieChartData(
+                      sections: [
+                        ...kAirlineList
+                            .map(
+                              (Map<String, dynamic> item) =>
+                                  PieChartSectionData(
+                                value: generateData(documents, item['value']),
+                                title: item['text'],
+                                color: Color(
+                                        (math.Random().nextDouble() * 0xFFFFFF)
+                                            .toInt())
+                                    .withOpacity(1.0),
+                              ),
+                            )
+                            .toList(),
+                      ],
                     ),
-                  )
-                  .toList(),
-            ],
-          ),
+                  )),
+            ),
+          ],
         ));
   }
 
-  double generateData(List<dynamic> documents, int type) {
+  double generateData(List<DocumentSnapshot> documents, int type) {
     var count = 0.0;
 
-    documents.forEach((dynamic document) {
+    documents.forEach((DocumentSnapshot document) {
       if (document.get('airline') == type) {
         count += 1.0;
       }
