@@ -1,8 +1,7 @@
 import 'package:aviation_web/services/flight.service.dart';
 import 'package:aviation_web/widgets/charts/airline_chart_card.dart';
 import 'package:aviation_web/widgets/flight_card.dart';
-import 'package:firebase/firebase.dart';
-import 'package:firebase/firestore.dart' as fs;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -31,13 +30,12 @@ class TopPage extends StatelessWidget {
           )
         ],
       ),
-      body: StreamBuilder<fs.QuerySnapshot>(
-        stream: firestore()
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
             .collection('flights')
-            .orderBy('time', 'desc')
-            .onSnapshot,
-        builder:
-            (BuildContext context, AsyncSnapshot<fs.QuerySnapshot> snapshot) {
+            .orderBy('time', descending: true)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
           switch (snapshot.connectionState) {
@@ -56,8 +54,7 @@ class TopPage extends StatelessWidget {
                             shrinkWrap: true,
                             children: [
                               AirlineChartCard(documents: snapshot.data!.docs),
-                              ...snapshot.data!.docs
-                                  .map((fs.DocumentSnapshot document) {
+                              ...snapshot.data!.docs.map((document) {
                                 var departure =
                                     getAirportName(document.get('departure'));
                                 var arrival =
