@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
                                 ),
                                 Scaffold(
                                   appBar: AppBar(
-                                    title: const Text('Tabbed AppBar'),
+                                    title: const Text('Aviation Web'),
                                     actions: [
                                       ElevatedButton.icon(
                                         icon: const Icon(
