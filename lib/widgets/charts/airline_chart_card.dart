@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:aviation_web/data/flight.constants.dart';
 import 'package:aviation_web/pages/chart_container.dart';
-import 'package:firebase/firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +53,10 @@ class AirlineChartCard extends StatelessWidget {
     var count = 0.0;
 
     documents.forEach((DocumentSnapshot document) {
-      if (document.get('airline') == type) {
+      if ((document.data().toString().contains('airline')
+              ? document.get('airline')
+              : 0) ==
+          type) {
         count += 1.0;
       }
     });

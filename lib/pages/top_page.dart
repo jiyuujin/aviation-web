@@ -30,12 +30,12 @@ class TopPage extends StatelessWidget {
           )
         ],
       ),
-      body: StreamBuilder(
+      body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('flights')
             .orderBy('time', descending: true)
             .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
           switch (snapshot.connectionState) {
@@ -54,16 +54,38 @@ class TopPage extends StatelessWidget {
                             shrinkWrap: true,
                             children: [
                               AirlineChartCard(documents: snapshot.data!.docs),
-                              ...snapshot.data!.docs.map((document) {
-                                var departure =
-                                    getAirportName(document.get('departure'));
-                                var arrival =
-                                    getAirportName(document.get('arrival'));
-                                var airline =
-                                    getAirlineName(document.get('airline'));
-                                var boardingType = getBoardingTypeName(
-                                    document.get('boardingType'));
-                                var registration = document.get('registration');
+                              ...snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                var departure = getAirportName(document
+                                        .data()
+                                        .toString()
+                                        .contains('departure')
+                                    ? document.get('departure')
+                                    : 0);
+                                var arrival = getAirportName(document
+                                        .data()
+                                        .toString()
+                                        .contains('arrival')
+                                    ? document.get('arrival')
+                                    : 0);
+                                var airline = getAirlineName(document
+                                        .data()
+                                        .toString()
+                                        .contains('airline')
+                                    ? document.get('airline')
+                                    : 0);
+                                var boardingType = getBoardingTypeName(document
+                                        .data()
+                                        .toString()
+                                        .contains('boardingType')
+                                    ? document.get('boardingType')
+                                    : 0);
+                                var registration = document
+                                        .data()
+                                        .toString()
+                                        .contains('registration')
+                                    ? document.get('registration')
+                                    : '';
                                 return FlightCard(
                                     title: '$departure - $arrival',
                                     explain:
