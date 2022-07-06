@@ -48,10 +48,10 @@ class AirlineChartCard extends StatelessWidget {
         ));
   }
 
-  double generateData(List documents, int type) {
+  double generateData(List<dynamic> documents, int type) {
     var count = 0.0;
 
-    documents.forEach((document) {
+    documents.forEach((dynamic document) {
       if (document.get('airline') == type) {
         count += 1.0;
       }
