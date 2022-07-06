@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class ChartContainer extends StatelessWidget {
   const ChartContainer({
-    Key? key,
+    super.key,
     required this.title,
     required this.color,
     required this.chart,
-  }) : super(key: key);
+  });
 
   final Color color;
   final String title;

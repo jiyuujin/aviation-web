@@ -6,7 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class AirlineChartCard extends StatelessWidget {
-  const AirlineChartCard({Key? key, required this.documents}) : super(key: key);
+  const AirlineChartCard({super.key, required this.documents});
 
   final List documents;
 
