@@ -2,14 +2,13 @@ import 'dart:math' as math;
 
 import 'package:aviation_web/data/flight.constants.dart';
 import 'package:aviation_web/pages/chart_container.dart';
-import 'package:firebase/firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class AirlineChartCard extends StatelessWidget {
   const AirlineChartCard({Key? key, required this.documents}) : super(key: key);
 
-  final List<DocumentSnapshot> documents;
+  final List documents;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +48,10 @@ class AirlineChartCard extends StatelessWidget {
         ));
   }
 
-  double generateData(List<DocumentSnapshot> documents, int type) {
+  double generateData(List documents, int type) {
     var count = 0.0;
 
-    documents.forEach((DocumentSnapshot document) {
+    documents.forEach((document) {
       if (document.get('airline') == type) {
         count += 1.0;
       }
