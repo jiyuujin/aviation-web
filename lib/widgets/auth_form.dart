@@ -99,6 +99,7 @@ class _AuthFormState extends State<AuthForm> {
             CustomButton(
               isLoading: _isLoading,
               text: _isSignUp ? 'Sign up' : 'Sign in',
+              type: 'primary',
               onPressed: _isLoading
                   ? null
                   : () async {
