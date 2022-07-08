@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
+  const CustomButton(
+      {super.key,
+      required this.text,
+      required this.type,
+      required this.onPressed,
+      required this.isLoading});
+
   final String text;
+  final String type;
   final dynamic onPressed;
   final bool isLoading;
-
-  const CustomButton(
-      {required this.text, required this.onPressed, required this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,9 @@ class CustomButton extends StatelessWidget {
                   text,
                   style: const TextStyle(fontSize: 18),
                 ),
+          style: ElevatedButton.styleFrom(
+            primary: type == 'primary' ? Colors.blueAccent : Colors.grey,
+          ),
           onPressed: onPressed,
         ),
       ),
