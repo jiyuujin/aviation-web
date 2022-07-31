@@ -20547,7 +20547,7 @@ for(s="",r=0;r<17;++r){q=$.Do[r]
 if(J.f(q.h(0,"value"),a))s=q.h(0,"text")}return s},
 aC2(a){var s,r,q
 if(a==null)return""
-for(s="",r=0;r<19;++r){q=$.ahl[r]
+for(s="",r=0;r<14;++r){q=$.ahl[r]
 if(J.f(q.h(0,"value"),a))s=q.h(0,"text")}return s},
 pk(a){var s=B.e.ar(u.T,a>>>6)+(a&63),r=s&1,q=B.e.ar(u.M,s>>>1)
 return q>>>4&-r|q&15&r-1},
@@ -73806,7 +73806,7 @@ return A.b([A.L(["value",0,"text","\u6771\u4eac\u7fbd\u7530 / HND"],s,r),A.L(["v
 $.Do=function(){var s=t.N,r=t.z
 return A.b([A.L(["value",0,"text","JAL","image","jal"],s,r),A.L(["value",1,"text","ANA","image","ana"],s,r),A.L(["value",2,"text","Skymark","image","skymark"],s,r),A.L(["value",3,"text","Starflyer","image","starflyer"],s,r),A.L(["value",4,"text","SolaseedAir","image","solaseed"],s,r),A.L(["value",5,"text","AirDo","image","airdo"],s,r),A.L(["value",6,"text","Peach","image","peach"],s,r),A.L(["value",7,"text","JetstarJapan","image","jetstar"],s,r),A.L(["value",8,"text","ValillaAir","image","vanilla"],s,r),A.L(["value",9,"text","SpringJapan","image","spring"],s,r),A.L(["value",10,"text","AirasiaJapan","image","airasia"],s,r),A.L(["value",11,"text","AmakusaAirline","image","amx"],s,r),A.L(["value",12,"text","Thai Airways","image","thaiair"],s,r),A.L(["value",13,"text","China Airlines","image","ci"],s,r),A.L(["value",14,"text","Eva Airways","image","eva"],s,r),A.L(["value",15,"text","V Air","image","v"],s,r),A.L(["value",16,"text","Tiger Air","image","tiger"],s,r)],t.gG)}()
 $.ahl=function(){var s=t.N,r=t.z
-return A.b([A.L(["value",0,"text","Boeing787-9"],s,r),A.L(["value",1,"text","Boeing787-8"],s,r),A.L(["value",2,"text","Boeing777-3"],s,r),A.L(["value",3,"text","Boeing777-2"],s,r),A.L(["value",4,"text","Boeing767-3"],s,r),A.L(["value",5,"text","Boeing737-8"],s,r),A.L(["value",6,"text","Boeing737-7"],s,r),A.L(["value",7,"text","Boeing737-5"],s,r),A.L(["value",8,"text","Boeing737-4"],s,r),A.L(["value",9,"text","Embraer190"],s,r),A.L(["value",10,"text","Embraer170"],s,r),A.L(["value",11,"text","Bombardier DHC8-Q400"],s,r),A.L(["value",12,"text","ATR42-6"],s,r),A.L(["value",13,"text","Boeing787-10"],s,r),A.L(["value",14,"text","AirbusA350-9"],s,r),A.L(["value",15,"text","AirbusA320"],s,r),A.L(["value",16,"text","AirbusA321"],s,r),A.L(["value",17,"text","Boeing747-4"],s,r),A.L(["value",18,"text","Boeing747-8"],s,r)],t.gG)}()
+return A.b([A.L(["value",0,"text","Boeing787-9"],s,r),A.L(["value",1,"text","Boeing787-8"],s,r),A.L(["value",2,"text","Boeing777-3"],s,r),A.L(["value",3,"text","Boeing777-2"],s,r),A.L(["value",4,"text","Boeing767-3"],s,r),A.L(["value",5,"text","Boeing737-8"],s,r),A.L(["value",6,"text","Boeing737-7"],s,r),A.L(["value",7,"text","Boeing737-5"],s,r),A.L(["value",8,"text","Embraer190"],s,r),A.L(["value",9,"text","ATR42-6"],s,r),A.L(["value",10,"text","Airbus A350"],s,r),A.L(["value",11,"text","Airbus A321"],s,r),A.L(["value",12,"text","Airbus A320"],s,r),A.L(["value",13,"text","Boeing747-4"],s,r)],t.gG)}()
 $.aiB=A.B(t.N,A.a4("qc"))
 $.aiz=null
 $.ama=null
