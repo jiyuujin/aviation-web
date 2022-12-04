@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:aviation_web/data/flight.constants.dart';
+import 'package:aviation_web/entities/flight.entity.dart';
 import 'package:aviation_web/pages/chart_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -13,6 +14,8 @@ class AirlineChartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Airline> airlines = airlineFromJson(kAirlineList);
+
     return Card(
         margin: const EdgeInsets.all(4),
         color: Colors.blue[100],
@@ -28,12 +31,11 @@ class AirlineChartCard extends StatelessWidget {
                   chart: PieChart(
                     PieChartData(
                       sections: [
-                        ...kAirlineList
+                        ...airlines
                             .map(
-                              (Map<String, dynamic> item) =>
-                                  PieChartSectionData(
-                                value: generateData(documents, item['value']),
-                                title: item['text'],
+                              (Airline item) => PieChartSectionData(
+                                value: generateData(documents, item.value),
+                                title: item.text,
                                 color: Color(
                                         (math.Random().nextDouble() * 0xFFFFFF)
                                             .toInt())

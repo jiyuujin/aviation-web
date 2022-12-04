@@ -25,10 +25,22 @@ class CustomButton extends StatelessWidget {
               ? const CircularProgressIndicator()
               : Text(
                   text,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: type == 'primary' ? Colors.white : Colors.black87),
                 ),
           style: ElevatedButton.styleFrom(
-            primary: type == 'primary' ? Colors.blueAccent : Colors.grey,
+            primary: type == 'primary'
+                ? Colors.blueAccent
+                : Colors.white60.withOpacity(0.8),
+            onPrimary: Colors.black12,
+            side: const BorderSide(
+              color: Colors.grey,
+              width: 1,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
           onPressed: onPressed,
         ),

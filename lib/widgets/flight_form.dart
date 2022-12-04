@@ -1,4 +1,5 @@
 import 'package:aviation_web/data/flight.constants.dart';
+import 'package:aviation_web/entities/flight.entity.dart';
 import 'package:aviation_web/widgets/custom_button.dart';
 import 'package:aviation_web/widgets/input_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,10 +19,10 @@ class _NewFlightState extends State<NewFlight> {
   bool _isRegister = true;
 
   DateTime _date = DateTime.now();
-  int _airline = 0;
-  int _departure = 0;
-  int _arrival = 0;
-  int _boardingType = 0;
+  Airline? _airline;
+  Airport? _departure;
+  Airport? _arrival;
+  BoardingType? _boardingType;
   String _registration = '';
 
   bool _isLoading = false;
@@ -38,19 +39,9 @@ class _NewFlightState extends State<NewFlight> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> airports = [];
-    List<String> airlines = [];
-    List<String> boardingTypes = [];
-
-    kAirportList.forEach((Map<String, dynamic> a) {
-      airports.add(a['text']);
-    });
-    kAirlineList.forEach((Map<String, dynamic> a) {
-      airlines.add(a['text']);
-    });
-    kBoardingTypeList.forEach((Map<String, dynamic> a) {
-      boardingTypes.add(a['text']);
-    });
+    List<Airport> airports = airportFromJson(kAirportList);
+    List<Airline> airlines = airlineFromJson(kAirlineList);
+    List<BoardingType> boardingTypes = boardingTypeFromJson(kBoardingTypeList);
 
     return Form(
       key: _formKey,
@@ -59,15 +50,6 @@ class _NewFlightState extends State<NewFlight> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 32),
-            Text(
-              _isRegister ? 'Register' : 'Update',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            const SizedBox(height: 48),
             CustomButton(
               isLoading: _isLoading,
               text: 'Date',
@@ -77,67 +59,72 @@ class _NewFlightState extends State<NewFlight> {
               },
             ),
             const SizedBox(height: 48),
-            DropdownButton(
-              items: <String>[...airports].map((String airport) {
-                return DropdownMenuItem<String>(
+            DropdownButton<Airport>(
+              items: airports.map<DropdownMenuItem<Airport>>((Airport airport) {
+                return DropdownMenuItem<Airport>(
                   value: airport,
-                  child: Text(airport),
+                  child: Text(airport.text),
                 );
               }).toList(),
-              onChanged: (value) {
-                List<Map<String, dynamic>> filter = (kAirportList
-                    .where((Map<String, dynamic> a) => a['text'] == value)
-                    .toList());
-                _departure = filter[0]['value'];
+              onChanged: (Airport? newValue) {
+                setState(() {
+                  _departure = newValue;
+                });
               },
+              hint: const Text('出発元の空港を選択してください'),
+              // value: _departure,
               isExpanded: true,
             ),
             const SizedBox(height: 48),
-            DropdownButton(
-              items: <String>[...airports].map((String airport) {
-                return DropdownMenuItem<String>(
+            DropdownButton<Airport>(
+              items: airports.map<DropdownMenuItem<Airport>>((Airport airport) {
+                return DropdownMenuItem<Airport>(
                   value: airport,
-                  child: Text(airport),
+                  child: Text(airport.text),
                 );
               }).toList(),
-              onChanged: (value) {
-                List<Map<String, dynamic>> filter = (kAirportList
-                    .where((Map<String, dynamic> a) => a['text'] == value)
-                    .toList());
-                _arrival = filter[0]['value'];
+              onChanged: (Airport? newValue) {
+                setState(() {
+                  _arrival = newValue;
+                });
               },
+              hint: const Text('到着先の空港を選択してください'),
+              // value: _arrival,
               isExpanded: true,
             ),
             const SizedBox(height: 48),
-            DropdownButton(
-              items: <String>[...airlines].map((String airline) {
-                return DropdownMenuItem<String>(
+            DropdownButton<Airline>(
+              items: airlines.map<DropdownMenuItem<Airline>>((Airline airline) {
+                return DropdownMenuItem<Airline>(
                   value: airline,
-                  child: Text(airline),
+                  child: Text(airline.text),
                 );
               }).toList(),
-              onChanged: (value) {
-                List<Map<String, dynamic>> filter = (kAirlineList
-                    .where((Map<String, dynamic> a) => a['text'] == value)
-                    .toList());
-                _airline = filter[0]['value'];
+              onChanged: (Airline? newValue) {
+                setState(() {
+                  _airline = newValue;
+                });
               },
+              hint: const Text('航空会社を選択してください'),
+              // value: _airline,
               isExpanded: true,
             ),
             const SizedBox(height: 48),
-            DropdownButton(
-              items: <String>[...boardingTypes].map((String boardingType) {
-                return DropdownMenuItem<String>(
+            DropdownButton<BoardingType>(
+              items: boardingTypes.map<DropdownMenuItem<BoardingType>>(
+                  (BoardingType boardingType) {
+                return DropdownMenuItem<BoardingType>(
                   value: boardingType,
-                  child: Text(boardingType),
+                  child: Text(boardingType.text),
                 );
               }).toList(),
-              onChanged: (value) {
-                List<Map<String, dynamic>> filter = (kBoardingTypeList
-                    .where((Map<String, dynamic> a) => a['text'] == value)
-                    .toList());
-                _boardingType = filter[0]['value'];
+              onChanged: (BoardingType? newValue) {
+                setState(() {
+                  _boardingType = newValue;
+                });
               },
+              hint: const Text('搭乗機材を選択してください'),
+              // value: _boardingType,
               isExpanded: true,
             ),
             const SizedBox(height: 48),
@@ -175,11 +162,11 @@ class _NewFlightState extends State<NewFlight> {
                             FirebaseFirestore.instance
                                 .collection('flights')
                                 .add({
-                              'time': _date,
-                              'departure': _departure,
-                              'arrival': _arrival,
-                              'airline': _airline,
-                              'boardingType': _boardingType,
+                              'time': _date.toString(),
+                              'departure': _departure!.value,
+                              'arrival': _arrival!.value,
+                              'airline': _airline!.value,
+                              'boardingType': _boardingType!.value,
                               'registration': _registration
                             });
                           } on FirebaseAuthException catch (e) {

@@ -1,9 +1,9 @@
-import 'package:aviation_web/widgets/charts/airline_chart_card.dart';
+import 'package:aviation_web/widgets/charts/boarding_type_chart_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class TopPage extends StatelessWidget {
-  const TopPage({super.key});
+class SecondaryPage extends StatelessWidget {
+  const SecondaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class TopPage extends StatelessWidget {
               return Column(
                 children: [
                   Expanded(
-                    child: AirlineChartCard(documents: snapshot.data!.docs),
+                    child:
+                        BoardingTypeChartCard(documents: snapshot.data!.docs),
                   ),
                 ],
               );
