@@ -1,7 +1,7 @@
 import 'package:aviation_web/pages/auth_page.dart';
-import 'package:aviation_web/pages/detail_page.dart';
 import 'package:aviation_web/pages/new_flight_page.dart';
-import 'package:aviation_web/pages/top_page.dart';
+import 'package:aviation_web/pages/primary_page.dart';
+import 'package:aviation_web/pages/secondary_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -83,7 +83,42 @@ class MyApp extends StatelessWidget {
                                   body: Column(
                                     children: const [
                                       Expanded(
-                                        child: TopPage(),
+                                        child: PrimaryPage(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Scaffold(
+                                  appBar: AppBar(
+                                    title: const Text('Aviation Web'),
+                                    actions: [
+                                      ElevatedButton.icon(
+                                        icon: const Icon(
+                                          Icons.exit_to_app,
+                                          color: Colors.white,
+                                        ),
+                                        label: const Text(
+                                          'Sign out',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onPressed: () async {
+                                          await FirebaseAuth.instance.signOut();
+                                        },
+                                      )
+                                    ],
+                                    bottom: TabBar(
+                                      tabs: choices.map((Choice choice) {
+                                        return Tab(
+                                          text: choice.title,
+                                          icon: Icon(choice.icon),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                  body: Column(
+                                    children: const [
+                                      Expanded(
+                                        child: SecondaryPage(),
                                       ),
                                     ],
                                   ),
@@ -123,41 +158,6 @@ class MyApp extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Scaffold(
-                                  appBar: AppBar(
-                                    title: const Text('Aviation Web'),
-                                    actions: [
-                                      ElevatedButton.icon(
-                                        icon: const Icon(
-                                          Icons.exit_to_app,
-                                          color: Colors.white,
-                                        ),
-                                        label: const Text(
-                                          'Sign out',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () async {
-                                          await FirebaseAuth.instance.signOut();
-                                        },
-                                      )
-                                    ],
-                                    bottom: TabBar(
-                                      tabs: choices.map((Choice choice) {
-                                        return Tab(
-                                          text: choice.title,
-                                          icon: Icon(choice.icon),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                  body: Column(
-                                    children: const [
-                                      Expanded(
-                                        child: DetailPage(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ]),
                             );
                         }
@@ -179,6 +179,6 @@ class Choice {
 
 const List<Choice> choices = <Choice>[
   Choice(title: 'OVERVIEW', icon: Icons.app_registration),
-  Choice(title: 'ADD', icon: Icons.add_alert),
   Choice(title: 'DETAIL', icon: Icons.airplane_ticket),
+  Choice(title: 'ADD', icon: Icons.add_alert),
 ];
