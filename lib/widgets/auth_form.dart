@@ -1,4 +1,5 @@
 import 'package:aviation_web/widgets/custom_button.dart';
+import 'package:aviation_web/widgets/features.dart';
 import 'package:aviation_web/widgets/input_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
                 _password = value;
               },
             ),
-            if (_isSignUp) ...[
+            if (canSignUp && _isSignUp) ...[
               const SizedBox(height: 24),
               InputField(
                 label: 'Confirm Password',
@@ -158,31 +159,32 @@ class _AuthFormState extends State<AuthForm> {
                     },
             ),
             const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  _isSignUp
-                      ? 'Do you have an account?'
-                      : 'Does not have an account?',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                ElevatedButton(
-                  child: Text(
-                    _isSignUp ? 'Sign in now' : 'Sign up now',
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+            if (canSignUp)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _isSignUp
+                        ? 'Do you have an account?'
+                        : 'Does not have an account?',
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  onPressed: () {
-                    if (_isSignUp) {
-                      setState(() => _isSignUp = false);
-                    } else {
-                      setState(() => _isSignUp = true);
-                    }
-                  },
-                ),
-              ],
-            ),
+                  ElevatedButton(
+                    child: Text(
+                      _isSignUp ? 'Sign in now' : 'Sign up now',
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      if (_isSignUp) {
+                        setState(() => _isSignUp = false);
+                      } else {
+                        setState(() => _isSignUp = true);
+                      }
+                    },
+                  ),
+                ],
+              ),
             if (_errorMessage.isNotEmpty) ...[
               const SizedBox(height: 24),
               Text(
