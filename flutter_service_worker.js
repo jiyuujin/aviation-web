@@ -20,8 +20,8 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "version.json": "5ec4b6548c9bae01491268896fe96d91",
-"index.html": "483580610e08359e31cf8b06c6bd9ec2",
-"/": "483580610e08359e31cf8b06c6bd9ec2"
+"index.html": "076e8a41d672c462d4c0e1b8296fdaa9",
+"/": "076e8a41d672c462d4c0e1b8296fdaa9"
 };
 
 // The application shell files that are downloaded before a service worker can
