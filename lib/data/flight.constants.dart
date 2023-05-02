@@ -17,7 +17,8 @@ const String kAirportList = '''[
   {"value": 13, "text": "秋田 / AXT"},
   {"value": 14, "text": "バンコク / BKK"},
   {"value": 15, "text": "台北 / TPE"},
-  {"value": 16, "text": "石垣 / ISG"}
+  {"value": 16, "text": "石垣 / ISG"},
+  {"value": 17, "text": "宮古 / MMY"}
 ]''';
 
 const String kAirlineList = '''[
