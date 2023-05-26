@@ -1,8 +1,8 @@
 import 'package:aviation_web/data/flight.constants.dart';
 import 'package:aviation_web/entities/flight.entity.dart';
+import 'package:aviation_web/hooks/use_firebase.dart';
 import 'package:aviation_web/widgets/custom_button.dart';
 import 'package:aviation_web/widgets/input_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,8 @@ class NewFlight extends StatefulWidget {
 
 class _NewFlightState extends State<NewFlight> {
   final _formKey = GlobalKey<FormState>();
+
+  final firebaseHook = useFirebase();
 
   bool _isRegister = true;
 
@@ -159,9 +161,7 @@ class _NewFlightState extends State<NewFlight> {
 
                         if (_isRegister) {
                           try {
-                            FirebaseFirestore.instance
-                                .collection('flights')
-                                .add({
+                            firebaseHook.insertItem({
                               'time': _date.toString(),
                               'departure': _departure!.value,
                               'arrival': _arrival!.value,

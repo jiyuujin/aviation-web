@@ -1,33 +1,33 @@
+import 'package:aviation_web/hooks/use_firebase.dart';
 import 'package:aviation_web/widgets/charts/airline_chart_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryPage extends StatelessWidget {
-  const PrimaryPage({super.key});
+  PrimaryPage({super.key});
+
+  final firebaseHook = useFirebase();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('flights')
-            .orderBy('time', descending: true)
-            .snapshots(),
+        stream: firebaseHook.fetchItems(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Text('Loading...');
-            default:
-              return Column(
-                children: [
-                  Expanded(
-                    child: AirlineChartCard(documents: snapshot.data!.docs),
-                  ),
-                ],
-              );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text('Loading...');
           }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+
+          return Column(
+            children: [
+              Expanded(
+                child: AirlineChartCard(documents: snapshot.data!.docs),
+              ),
+            ],
+          );
         },
       ),
     );
