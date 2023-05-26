@@ -1,4 +1,3 @@
-import 'package:aviation_web/hooks/use_firebase_auth.dart';
 import 'package:aviation_web/widgets/custom_button.dart';
 import 'package:aviation_web/widgets/features.dart';
 import 'package:aviation_web/widgets/input_field.dart';
@@ -14,8 +13,6 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-
-  final firebaseHook = useFirebaseAuth();
 
   bool _isSignUp = false;
 
@@ -116,7 +113,9 @@ class _AuthFormState extends State<AuthForm> {
 
                         if (_isSignUp) {
                           try {
-                            firebaseHook.signUp(_email, _password);
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: _email, password: _password);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               setState(() {
@@ -136,7 +135,9 @@ class _AuthFormState extends State<AuthForm> {
                           }
                         } else {
                           try {
-                            firebaseHook.signIn(_email, _password);
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: _email, password: _password);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'user-not-found') {
                               setState(() {
