@@ -1,3 +1,4 @@
+import 'package:aviation_web/hooks/use_firebase_auth.dart';
 import 'package:aviation_web/pages/auth_page.dart';
 import 'package:aviation_web/pages/new_flight_page.dart';
 import 'package:aviation_web/pages/primary_page.dart';
@@ -7,10 +8,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final firebaseHook = useFirebaseAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,7 @@ class MyApp extends StatelessWidget {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         onPressed: () async {
-                                          await FirebaseAuth.instance.signOut();
+                                          firebaseHook.signOut();
                                         },
                                       )
                                     ],
@@ -81,7 +84,7 @@ class MyApp extends StatelessWidget {
                                     ),
                                   ),
                                   body: Column(
-                                    children: const [
+                                    children: [
                                       Expanded(
                                         child: PrimaryPage(),
                                       ),
@@ -102,7 +105,7 @@ class MyApp extends StatelessWidget {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         onPressed: () async {
-                                          await FirebaseAuth.instance.signOut();
+                                          firebaseHook.signOut();
                                         },
                                       )
                                     ],
@@ -116,7 +119,7 @@ class MyApp extends StatelessWidget {
                                     ),
                                   ),
                                   body: Column(
-                                    children: const [
+                                    children: [
                                       Expanded(
                                         child: SecondaryPage(),
                                       ),
@@ -137,7 +140,7 @@ class MyApp extends StatelessWidget {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         onPressed: () async {
-                                          await FirebaseAuth.instance.signOut();
+                                          firebaseHook.signOut();
                                         },
                                       )
                                     ],
