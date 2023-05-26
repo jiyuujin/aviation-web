@@ -8,10 +8,15 @@ UseFirebase useFirebase() {
         .snapshots();
   }
 
-  return UseFirebase(fetchItems: fetchItems);
+  void insertItem(Map<String, dynamic> item) {
+    FirebaseFirestore.instance.collection('flights').add(item);
+  }
+
+  return UseFirebase(fetchItems: fetchItems, insertItem: insertItem);
 }
 
 class UseFirebase {
   final Stream<QuerySnapshot<Map<String, dynamic>>> Function() fetchItems;
-  UseFirebase({required this.fetchItems});
+  final void Function(Map<String, dynamic> item) insertItem;
+  UseFirebase({required this.fetchItems, required this.insertItem});
 }
