@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
                                     ),
                                   ),
                                   body: Column(
-                                    children: const [
+                                    children: [
                                       Expanded(
                                         child: PrimaryPage(),
                                       ),
@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
                                     ),
                                   ),
                                   body: Column(
-                                    children: const [
+                                    children: [
                                       Expanded(
                                         child: SecondaryPage(),
                                       ),
