@@ -1,4 +1,4 @@
-final List<int> year = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
+final List<int> year = [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
 
 const String kAirportList = '''[
   {"value": 0, "text": "東京羽田 / HND"},

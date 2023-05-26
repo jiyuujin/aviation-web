@@ -64,6 +64,10 @@ class BoardingTypeChartCard extends StatelessWidget {
                                           documents, item.value, 2022),
                                       width: 15),
                                   BarChartRodData(
+                                      toY: generateDataBy(
+                                          documents, item.value, 2023),
+                                      width: 15),
+                                  BarChartRodData(
                                       toY: generateData(documents, item.value),
                                       width: 15),
                                 ],
