@@ -39,7 +39,8 @@ const String kAirlineList = '''[
   {"value": 13, "text": "China Airlines", "image": "ci"},
   {"value": 14, "text": "Eva Airways", "image": "eva"},
   {"value": 15, "text": "V Air", "image": "v"},
-  {"value": 16, "text": "Tiger Air", "image": "tiger"}
+  {"value": 16, "text": "Tiger Air", "image": "tiger"},
+  {"value": 17, "text": "IBEX Airlines", "image": "ibex"},
 ]''';
 
 const String kBoardingTypeList = '''[
@@ -56,5 +57,7 @@ const String kBoardingTypeList = '''[
   {"value": 10, "text": "Airbus A350"},
   {"value": 11, "text": "Airbus A321"},
   {"value": 12, "text": "Airbus A320"},
-  {"value": 13, "text": "Boeing747-4"}
+  {"value": 13, "text": "Boeing747-4"},
+  {"value": 14, "text": "Bombardier DHC8-Q400"},
+  {"value": 15, "text": "Canadian Bombardier CRJ-700"}
 ]''';
